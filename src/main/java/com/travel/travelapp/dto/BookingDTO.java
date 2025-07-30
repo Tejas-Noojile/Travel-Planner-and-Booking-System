@@ -1,50 +1,26 @@
-package com.travel.travelapp.entity;
+package com.travel.travelapp.dto;
 
-import jakarta.persistence.*;
+import com.travel.travelapp.entity.BookingStatus;
+import com.travel.travelapp.entity.BookingType;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-@Entity
-@Table(name = "bookings")
-public class Booking {
-
-    @Id
-    @Column(name = "booking_id", length = 36)
-    private String bookingId = UUID.randomUUID().toString();
-
-    @Column(name = "user_id", length = 36, nullable = false)
+public class BookingDTO {
+    private String bookingId;
     private String userId;
-
-    @Column(name = "trip_id", length = 36, nullable = false)
     private String tripId;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "booking_type", nullable = false)
     private BookingType bookingType;
-
-    @Column(name = "vendor_id", length = 36)
     private String vendorId;
-
-    @Lob
-    @Column(name = "details")
     private String details;
-
-    @Column(name = "start_datetime")
     private LocalDateTime startDatetime;
-
-    @Column(name = "end_datetime")
     private LocalDateTime endDatetime;
+    private BookingStatus status;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private BookingStatus status = BookingStatus.CONFIRMED;
+    public BookingDTO() { }
 
-    public Booking() { }
-
-    public Booking(String bookingId, String userId, String tripId,
-                   BookingType bookingType, String vendorId, String details,
-                   LocalDateTime startDatetime, LocalDateTime endDatetime,
-                   BookingStatus status) {
+    public BookingDTO(String bookingId, String userId, String tripId,
+                      BookingType bookingType, String vendorId, String details,
+                      LocalDateTime startDatetime, LocalDateTime endDatetime,
+                      BookingStatus status) {
         this.bookingId = bookingId;
         this.userId = userId;
         this.tripId = tripId;
