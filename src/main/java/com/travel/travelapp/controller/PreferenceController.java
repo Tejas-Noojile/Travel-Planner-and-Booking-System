@@ -2,15 +2,16 @@ package com.travel.travelapp.controller;
 
 import com.travel.travelapp.dto.PreferenceRequest;
 import com.travel.travelapp.service.PreferenceService;
+import com.travel.travelapp.service.impl.PreferenceServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/preferences")
 public class PreferenceController {
 
-    private final PreferenceService preferenceService;
+    private final PreferenceServiceImpl preferenceService;
 
-    public PreferenceController(PreferenceService preferenceService) {
+    public PreferenceController(PreferenceServiceImpl preferenceService) {
         this.preferenceService = preferenceService;
     }
 

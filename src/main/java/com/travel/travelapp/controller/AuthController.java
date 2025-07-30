@@ -3,7 +3,10 @@ package com.travel.travelapp.controller;
 import com.travel.travelapp.dto.AuthRequest;
 import com.travel.travelapp.dto.SignupRequest;
 import com.travel.travelapp.service.AuthService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -16,11 +19,14 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public void signup(@RequestBody SignupRequest request) {
+    public ResponseEntity<Void> signup(@RequestBody SignupRequest request) {
+        authService.signup(request);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody AuthRequest request) {
-        return null;
+    public ResponseEntity<Map<String, String>> login(@RequestBody AuthRequest request) {
+        String token = authService.login(request);
+        return ResponseEntity.ok(Map.of("token", token));
     }
 }
