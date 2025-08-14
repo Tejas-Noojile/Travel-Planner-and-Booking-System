@@ -1,0 +1,10 @@
+<div class="toast-container" *ngIf="toastService.isVisible$ | async" [ngClass]="{
+    'success': (toastService.type$ | async) === 'success',
+    'error': (toastService.type$ | async) === 'error',
+    'hiding': toastService.isHiding$ | async
+  }">
+  <div class="toast-message">
+    {{ toastService.message$ | async }}
+  </div>
+  <div class="toast-progress"></div>
+</div>

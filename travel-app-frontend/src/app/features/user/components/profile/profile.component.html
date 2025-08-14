@@ -1,0 +1,78 @@
+<div class="profile-container" *ngIf="user">
+  <div class="profile-header">
+    <div class="profile-avatar">
+      <span>{{ user.name.charAt(0) }}</span>
+    </div>
+    <div class="profile-summary">
+      <h1 class="user-name">{{ user.name }}</h1>
+      <p class="user-email">{{ user.email }}</p>
+    </div>
+    <button class="btn-logout" (click)="logout()">Logout</button>
+  </div>
+
+  <div class="profile-section">
+    <div class="section-header">
+      <h2>Personal Information</h2>
+      <button class="btn-edit" *ngIf="editingSection !== 'personal'" (click)="edit('personal')">Edit</button>
+    </div>
+    <div class="section-content">
+      <form [formGroup]="profileForm" (ngSubmit)="savePersonalDetails()">
+        <div class="info-row">
+          <label>Full Name</label>
+          <div *ngIf="editingSection !== 'personal'">{{ user.name }}</div>
+          <input *ngIf="editingSection === 'personal'" type="text" formControlName="name" class="form-control">
+        </div>
+        <div class="info-row">
+          <label>Phone Number</label>
+          <div *ngIf="editingSection !== 'personal'">{{ user.phone }}</div>
+          <input *ngIf="editingSection === 'personal'" type="text" formControlName="phone" class="form-control">
+        </div>
+        <div class="info-row">
+          <label>Email Address</label>
+          <div>{{ user.email }} <span class="badge">Not Editable</span></div>
+        </div>
+        <div class="form-actions" *ngIf="editingSection === 'personal'">
+          <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+          <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="profile-section">
+    <div class="section-header">
+      <h2>Travel Preferences</h2>
+      <button class="btn-edit" *ngIf="editingSection !== 'preferences'" (click)="edit('preferences')">Edit</button>
+    </div>
+    <div class="section-content">
+      <form [formGroup]="preferencesForm" (ngSubmit)="savePreferences()">
+        <div class="info-row">
+          <label>My Travel Style</label>
+          <div class="chip-group" *ngIf="editingSection !== 'preferences'">
+            <span *ngFor="let interest of preferencesForm.get('travelInterests')?.value" class="chip">{{ interest
+              }}</span>
+          </div>
+          <div class="chip-group-editable" *ngIf="editingSection === 'preferences'">
+            <button type="button" *ngFor="let interest of allInterests" class="chip"
+              [class.selected]="isInterestSelected(interest)" (click)="toggleInterest(interest)">
+              {{ interest }}
+            </button>
+          </div>
+        </div>
+        <div class="info-row">
+          <label>Preferred Budget</label>
+          <div *ngIf="editingSection !== 'preferences'">{{ preferencesForm.get('budgetRange')?.value }}</div>
+          <select *ngIf="editingSection === 'preferences'" formControlName="budgetRange" class="form-control">
+            <option>Budget</option>
+            <option>Mid-Range</option>
+            <option>Luxury</option>
+          </select>
+        </div>
+        <div class="form-actions" *ngIf="editingSection === 'preferences'">
+          <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Preferences</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

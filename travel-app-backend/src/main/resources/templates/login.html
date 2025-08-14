@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .top-bar {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 12px 0;
+        }
+
+        .navbar-brand {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1f2937 !important;
+        }
+
+        .nav-link {
+            color: #6b7280 !important;
+            font-weight: 500;
+            margin: 0 15px;
+        }
+
+        .nav-link:hover {
+            color: #1f2937 !important;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 80px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1f2937;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-control {
+            border: none;
+            background-color: #f3f4f6;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            background-color: #e5e7eb;
+            box-shadow: none;
+            border: none;
+        }
+
+        .show-password {
+            color: #3b82f6;
+            font-size: 14px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .show-password:hover {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+
+        .btn-continue {
+            background-color: #3b82f6;
+            border: none;
+            color: white;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 500;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .btn-continue:hover {
+            background-color: #2563eb;
+        }
+
+        .divider {
+            text-align: center;
+            color: #9ca3af;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #e5e7eb;
+            z-index: 1;
+        }
+
+        .divider span {
+            background-color: white;
+            padding: 0 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-social {
+            background-color: #f3f4f6;
+            border: none;
+            color: #374151;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 500;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .btn-social:hover {
+            background-color: #e5e7eb;
+            color: #374151;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .signup-link a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .globe-icon {
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <span>←</span> Journey
+        </a>
+        <div class="navbar-nav ms-auto">
+            <a class="nav-link" href="#">Stays</a>
+            <a class="nav-link" href="#">Flights</a>
+            <a class="nav-link" href="#">Cars</a>
+            <a class="nav-link" href="#">Packages</a>
+            <a class="nav-link" href="#">Things to do</a>
+            <a class="nav-link" href="#">List your property</a>
+            <div class="nav-link">
+                <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="login-container">
+        <h1 class="welcome-title">Welcome to Journey</h1>
+
+        <form>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Email or phone number">
+            </div>
+
+            <div class="mb-3">
+                <input type="password" class="form-control" placeholder="Password">
+            </div>
+
+            <a href="#" class="show-password">Show password</a>
+
+            <button type="submit" class="btn btn-continue">Continue</button>
+
+            <div class="divider">
+                <span>or</span>
+            </div>
+
+            <button type="button" class="btn btn-social">Continue with social media</button>
+            <button type="button" class="btn btn-social">Continue with social media</button>
+
+            <div class="signup-link">
+                <span>Don't have an account? </span>
+                <a href="signup">Sign up</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.querySelector('form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const emailOrPhone = document.querySelector('input[placeholder="Email or phone number"]').value;
+        const password = document.querySelector('input[placeholder="Password"]').value;
+
+        const response = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ emailOrPhone, password })
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            localStorage.setItem('token', data.token);
+            alert('Login successful!');
+            // Redirect or update UI as needed
+        } else {
+            alert('Login failed. Please check your credentials.');
+        }
+    });
+</script>
+</body>
+</html>

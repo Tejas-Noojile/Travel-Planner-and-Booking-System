@@ -1,0 +1,22 @@
+<div class="login-container">
+  <h1 class="welcome-title">Create your Journey account</h1>
+
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <input type="text" class="form-control" placeholder="Full Name" formControlName="name" required>
+    <input type="email" class="form-control" placeholder="Email" formControlName="email" required>
+    <input type="text" class="form-control" placeholder="Phone Number" formControlName="phone" required>
+    <input type="password" class="form-control" placeholder="Password" formControlName="password" required>
+    <select class="form-control" formControlName="role" required>
+      <option value="" disabled>Select Role</option>
+      <option value="TRAVELER">Traveler</option>
+      <option value="ADMIN">Admin</option>
+    </select>
+
+    <button type="submit" class="btn btn-continue" [disabled]="signupForm.invalid">Sign Up</button>
+
+    <div class="signup-link">
+      <span>Already have an account? </span>
+      <a routerLink="/auth/login">Log in</a>
+    </div>
+  </form>
+</div>

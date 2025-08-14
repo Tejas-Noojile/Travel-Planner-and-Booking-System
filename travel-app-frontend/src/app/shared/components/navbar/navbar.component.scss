@@ -1,0 +1,43 @@
+.navbar {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    padding: 12px 0;
+}
+
+.navbar-brand {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1f2937 !important;
+}
+
+.nav-link {
+    color: #6b7280 !important;
+    font-weight: 500;
+    margin: 0 15px;
+    transition: color 0.2s ease-in-out;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.nav-link:hover {
+    color: #1f2937 !important;
+}
+
+// Add a subtle underline effect on hover
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #3b82f6;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}

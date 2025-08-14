@@ -1,0 +1,23 @@
+<div class="login-container">
+<h1 class="welcome-title">Welcome to Journey</h1>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <input type="text" class="form-control" placeholder="Email or phone number" formControlName="emailOrPhone">
+  </div>
+
+  <div class="mb-3">
+    <input type="password" class="form-control" placeholder="Password" formControlName="password">
+  </div>
+
+  <button type="submit" class="btn btn-continue" [disabled]="loginForm.invalid">Continue</button>
+
+  <div class="divider">
+    <span>or</span>
+  </div>
+  <div class="signup-link">
+    <span>Don't have an account? </span>
+    <a routerLink="/auth/signup">Sign up</a>
+  </div>
+</form>
+</div>
