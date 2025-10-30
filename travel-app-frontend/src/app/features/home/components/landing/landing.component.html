@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+
+<div class="hero-section">
+  <div class="hero-overlay"></div>
+  <div class="hero-content container">
+    <h1 class="hero-title">Hey {{ user?.name }}</h1>
+    <h1 class="hero-title">Your journey begins here.</h1>
+    <p class="hero-subtitle">Discover and book extraordinary places to stay and things to do.</p>
+    <div class="search-bar">
+      <input type="text" placeholder="Search destinations, hotels, activities...">
+      <button>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container featured-section">
+  <h2 class="section-title">Popular Destinations</h2>
+  <div class="row">
+    <div class="col-lg-4 col-md-6">
+      <div class="destination-card">
+        <img src="https://static.toiimg.com/photo/54559212.cms" alt="Bengaluru">
+        <div class="card-overlay">
+          <h5 class="card-title">Bengaluru, Karnataka</h5>
+          <p class="card-description">A vibrant city known for its tech industry.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <div class="destination-card">
+        <img src="https://content.r9cdn.net/rimg/dimg/c8/bd/0b5f2516-city-44834-18fe8ded347.jpg?width=1366&height=768&xhint=1416&yhint=1008&crop=true" alt="Kolkata">
+        <div class="card-overlay">
+          <h5 class="card-title">Kolkata, West Bengal</h5>
+          <p class="card-description">A city of joy and culture.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <div class="destination-card">
+        <img src="https://media1.thrillophilia.com/filestore/hbyesuouzbriov3uucdicj3vmxiq_img-2.jpg?w=753&h=450&dpr=2.0" alt="Mangaluru">
+        <div class="card-overlay">
+          <h5 class="card-title">Mangaluru, Karnataka</h5>
+          <p class="card-description">A coastal city known for its beaches and cuisine.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
