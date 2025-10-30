@@ -1,0 +1,108 @@
+$font-serif: 'Playfair Display', serif;
+$font-sans: 'Lato', sans-serif;
+$primary-color: #3b82f6;
+$text-dark: #2c3e50;
+$text-light: #7f8c8d;
+$gray-border: #e5e7eb;
+$danger-color: #ef4444;
+
+.timeline {
+  position: relative;
+  padding-left: 50px; // Make space for the marker and time
+}
+
+.timeline-item {
+  position: relative; // This is the key for positioning children
+  padding: 0.5rem 0 1.5rem 2rem;
+  border-left: 2px solid $gray-border;
+}
+
+.timeline-time {
+  position: absolute;
+  left: -85px; // Position it to the left of the timeline
+  top: 0;
+  font-weight: 700;
+  color: $text-dark;
+  width: 70px;
+  text-align: right;
+  font-size: 0.9rem;
+}
+
+.timeline-marker {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: white;
+  border: 3px solid $primary-color;
+  position: absolute;
+  left: -9px; // Position it directly on top of the line
+  top: 5px;
+  z-index: 1;
+}
+
+.timeline-content {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  border: 1px solid $gray-border;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+
+  .content-text {
+    flex: 1;
+
+    .activity-type {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: $primary-color;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      font-family: $font-sans;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin: 0.25rem 0 0.5rem 0;
+      color: $text-dark;
+    }
+
+    p {
+      margin: 0;
+      color: $text-light;
+    }
+  }
+}
+
+.empty-day {
+  text-align: center;
+  padding: 3rem;
+  color: $text-light;
+  border-left: 2px solid $gray-border;
+  margin-left: 50px;
+}
+
+.btn-icon {
+  background: rgba(255,255,255,0.8);
+  border: none;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0; // Prevent button from shrinking
+
+  &.btn-delete {
+    color: $danger-color;
+
+    &:hover {
+      background-color: $danger-color;
+      color: white;
+      transform: scale(1.1);
+    }
+  }
+}
