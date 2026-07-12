@@ -1,0 +1,118 @@
+<!-- src/app/components/day-plan/day-plan.component.html -->
+
+<div class="day-plan-container">
+  <div class="day-plan-header">
+    <div class="day-plan-title-section">
+      <h2>{{ dayPlan.title }}</h2>
+      <p class="day-date">{{ dayPlan.date | date:'fullDate' }}</p>
+    </div>
+    <button class="close-btn" (click)="onClose()">✕</button>
+  </div>
+
+  <div class="day-plan-stats">
+    <div class="stat">
+      <span class="stat-label">Events:</span>
+      <span class="stat-value">{{ events.length }}</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Total Cost:</span>
+      <span class="stat-value budget">₹{{ getTotalDayCost() }}</span>
+    </div>
+  </div>
+
+  <!-- Events Timeline -->
+  <div class="events-timeline">
+    <h3>Events Schedule</h3>
+    
+    <!-- Existing Events -->
+    <div class="timeline-container">
+      <div *ngFor="let event of events" class="timeline-event">
+        <div class="event-time-marker">
+          <span class="time">{{ event.startTime }}</span>
+        </div>
+        <div class="event-content" *ngIf="editingEvent?.id !== event.id">
+          <div class="event-header">
+            <span class="event-category-icon">{{ getCategoryIcon(event.category) }}</span>
+            <h4 class="event-title">{{ event.title }}</h4>
+            <div class="event-actions">
+              <button class="btn-icon" (click)="editEvent(event)">✏️</button>
+              <button class="btn-icon delete" (click)="deleteEvent(event)">🗑️</button>
+            </div>
+          </div>
+          <p class="event-description" *ngIf="event.description">{{ event.description }}</p>
+          <div class="event-details">
+            <span class="event-location">📍 {{ event.location }}</span>
+            <span class="event-duration">⏱️ {{ event.startTime }} - {{ event.endTime }}</span>
+            <span class="event-cost" *ngIf="event.cost">💰 ₹{{ event.cost }}</span>
+          </div>
+          <p class="event-notes" *ngIf="event.notes">{{ event.notes }}</p>
+        </div>
+
+        <!-- Edit Event Form -->
+        <div class="event-edit-form" *ngIf="editingEvent?.id === event.id">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Title</label>
+              <input 
+                type="text" 
+                [(ngModel)]="editingEvent.title" 
+                class="form-control"
+                placeholder="Event title"
+              >
+            </div>
+            <div class="form-group">
+              <label>Category</label>
+              <select [(ngModel)]="editingEvent.category" class="form-control">
+                <option *ngFor="let category of eventCategories" [value]="category">
+                  {{ category }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Description</label>
+            <textarea 
+              [(ngModel)]="editingEvent.description" 
+              class="form-control"
+              rows="2"
+              placeholder="Event description"
+            ></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Start Time</label>
+              <input 
+                type="time" 
+                [(ngModel)]="editingEvent.startTime" 
+                class="form-control"
+              >
+            </div>
+            <div class="form-group">
+              <label>End Time</label>
+              <input 
+                type="time" 
+                [(ngModel)]="editingEvent.endTime" 
+                class="form-control"
+              >
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Location</label>
+              <input 
+                type="text" 
+                [(ngModel)]="editingEvent.location" 
+                class="form-control"
+                placeholder="Event location"
+              >
+            </div>
+            <div class="form-group">
+              <label>Cost</label>
+              <input 
+                type="number" 
+                [(ngModel)]="editingEvent.cost" 
+                class="form-control"
+                min="0

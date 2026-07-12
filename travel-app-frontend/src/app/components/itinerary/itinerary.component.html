@@ -1,0 +1,150 @@
+<!-- src/app/components/itinerary/itinerary.component.html -->
+
+<div class="itinerary-container">
+  <!-- Header -->
+  <div class="itinerary-header">
+    <h1 class="itinerary-title">
+      {{ itinerary?.title || 'Travel Itinerary' }}
+    </h1>
+    
+    <div class="header-actions">
+      <button class="btn btn-secondary" (click)="toggleViewMode()">
+        {{ viewMode === 'list' ? '📅 Calendar View' : '📋 List View' }}
+      </button>
+      <button class="btn btn-primary" (click)="addNewDayPlan()">
+        ➕ Add Day
+      </button>
+    </div>
+  </div>
+
+  <!-- Trip Info -->
+  <div class="trip-info" *ngIf="itinerary">
+    <div class="info-card">
+      <span class="info-label">Destination:</span>
+      <span class="info-value">{{ itinerary.destination }}</span>
+    </div>
+    <div class="info-card">
+      <span class="info-label">Duration:</span>
+      <span class="info-value">{{ itinerary.totalDays }} days</span>
+    </div>
+    <div class="info-card">
+      <span class="info-label">Dates:</span>
+      <span class="info-value">
+        {{ itinerary.startDate | date:'mediumDate' }} - {{ itinerary.endDate | date:'mediumDate' }}
+      </span>
+    </div>
+    <div class="info-card">
+      <span class="info-label">Total Budget:</span>
+      <span class="info-value budget">₹{{ getTotalBudget() }}</span>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>Loading your itinerary...</p>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+    <button class="retry-btn" (click)="loadItinerary()">Retry</button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="itinerary-content" *ngIf="!isLoading && !errorMessage">
+    
+    <!-- List View -->
+    <div *ngIf="viewMode === 'list'" class="list-view">
+      <div class="day-plans-container">
+        <div 
+          *ngFor="let dayPlan of dayPlans; let i = index" 
+          class="day-plan-card"
+          [class.selected]="selectedDayPlan?.id === dayPlan.id"
+        >
+          <div class="day-plan-header" (click)="selectDayPlan(dayPlan)">
+            <div class="day-plan-info">
+              <h3 class="day-title">{{ dayPlan.title }}</h3>
+              <p class="day-date">{{ dayPlan.date | date:'fullDate' }}</p>
+              <span class="events-count">{{ dayPlan.events?.length || 0 }} events</span>
+            </div>
+            <div class="day-plan-actions">
+              <button class="btn-icon delete-btn" (click)="deleteDayPlan(dayPlan); $event.stopPropagation()">
+                🗑️
+              </button>
+            </div>
+          </div>
+
+          <!-- Events List -->
+          <div class="events-container" *ngIf="dayPlan.events && dayPlan.events.length > 0">
+            <div *ngFor="let event of dayPlan.events" class="event-card">
+              <div class="event-time">
+                {{ event.startTime }} - {{ event.endTime }}
+              </div>
+              <div class="event-details">
+                <h4 class="event-title">{{ event.title }}</h4>
+                <p class="event-location">📍 {{ event.location }}</p>
+                <span class="event-category">{{ event.category }}</span>
+                <span class="event-cost" *ngIf="event.cost">₹{{ event.cost }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="no-events" *ngIf="!dayPlan.events || dayPlan.events.length === 0">
+            <p>No events planned for this day</p>
+            <button class="btn btn-sm btn-primary" (click)="selectDayPlan(dayPlan)">
+              Add Events
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calendar View -->
+    <div *ngIf="viewMode === 'calendar'" class="calendar-view">
+      <div class="calendar-grid">
+        <div 
+          *ngFor="let dayPlan of dayPlans" 
+          class="calendar-day"
+          (click)="selectDayPlan(dayPlan)"
+        >
+          <div class="calendar-date">
+            {{ dayPlan.date | date:'d' }}
+          </div>
+          <div class="calendar-day-title">
+            {{ dayPlan.title }}
+          </div>
+          <div class="calendar-events">
+            <span class="event-indicator" *ngFor="let event of dayPlan.events?.slice(0,3)">
+              •
+            </span>
+            <span *ngIf="(dayPlan.events?.length || 0) > 3" class="more-events">
+              +{{ (dayPlan.events?.length || 0) - 3 }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Day Plans -->
+    <div *ngIf="dayPlans.length === 0" class="empty-state">
+      <div class="empty-icon">📅</div>
+      <h3>No day plans yet</h3>
+      <p>Start planning your trip by adding your first day</p>
+      <button class="btn btn-primary" (click)="addNewDayPlan()">
+        Add First Day
+      </button>
+    </div>
+  </div>
+
+  <!-- Day Plan Detail Modal/Sidebar -->
+  <div *ngIf="selectedDayPlan" class="day-detail-overlay" (click)="selectedDayPlan = null">
+    <div class="day-detail-modal" (click)="$event.stopPropagation()">
+      <app-day-plan 
+        [dayPlan]="selectedDayPlan"
+        (dayPlanUpdated)="onDayPlanUpdated($event)"
+        (close)="selectedDayPlan = null">
+      </app-day-plan>
+    </div>
+  </div>
+</div>

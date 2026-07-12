@@ -1,28 +1,31 @@
+// src/app/app.module.ts
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; // Import HttpClientModule and HTTP_INTERCEPTORS
-import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
-import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
+import { AppComponent } from './app';
+import { ItineraryComponent } from './components/itinerary/itinerary.component';
+import { DayPlanComponent } from './components/day-plan/day-plan.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule, // Add HttpClientModule
-    ReactiveFormsModule, // Add ReactiveFormsModule for login/signup forms
-    CoreModule,
-    SharedModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ItineraryComponent,
+    DayPlanComponent
   ],
-  providers: [
-    // Provide the JWT Interceptor
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent],
+  providers: [],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
