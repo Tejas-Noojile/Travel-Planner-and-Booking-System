@@ -77,25 +77,36 @@ export class DayPlanComponent implements OnInit {
     this.editingEvent = { ...event };
   }
 
-//   updateEvent(): void {
-//     if (!this.editingEvent || !this.editingEvent.id) return;
+  updateEvent(): void {
+    if (!this.editingEvent || !this.editingEvent.id) return;
 
-//     this.itineraryService.updateEvent(this.editingEvent.id, this.editingEvent).subscribe({
-//       next: (updatedEvent) => {
-//         const index = this.events.findIndex(e => e.id === updatedEvent.id);
-//         if (index !== -1) {
-//           this.events[index] = updatedEvent;
-//           this.events.sort((a, b) => a.startTime.localeCompare(b.startTime));
-//           this.dayPlan.events = this.events;
-//         }
-//         this.editingEvent = null;
-//         this.dayPlanUpdated.emit(this.dayPlan);
-//       },
-//       error: (error) => {
-//         console.error('Error updating event:', error);
-//       }
-//     });
-//   }
+    const updateRequest = {
+      id: this.editingEvent.id,
+      title: this.editingEvent.title,
+      description: this.editingEvent.description,
+      startTime: this.editingEvent.startTime,
+      endTime: this.editingEvent.endTime,
+      location: this.editingEvent.location,
+      category: this.editingEvent.category,
+      cost: this.editingEvent.cost,
+      notes: this.editingEvent.notes
+    };
+    this.itineraryService.updateEvent(this.editingEvent.id, updateRequest).subscribe({
+      next: (updatedEvent) => {
+        const index = this.events.findIndex(e => e.id === updatedEvent.id);
+        if (index !== -1) {
+          this.events[index] = updatedEvent;
+          this.events.sort((a, b) => a.startTime.localeCompare(b.startTime));
+          this.dayPlan.events = this.events;
+        }
+        this.editingEvent = null;
+        this.dayPlanUpdated.emit(this.dayPlan);
+      },
+      error: (error) => {
+        console.error('Error updating event:', error);
+      }
+    });
+  }
 
   deleteEvent(event: Event): void {
     if (!event.id) return;

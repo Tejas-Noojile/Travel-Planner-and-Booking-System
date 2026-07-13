@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { UserService } from '../../../user/services/user.service';
 import { User } from '../../../../shared/models/user.model';
+import { NavbarComponent } from '../../../../shared/components/navbar/navbar.component';
 
 @Component({
   selector: 'app-landing',
+  standalone: true,
+  imports: [CommonModule, NavbarComponent],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss'
 })

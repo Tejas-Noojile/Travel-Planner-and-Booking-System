@@ -49,20 +49,20 @@
         </div>
 
         <!-- Edit Event Form -->
-        <div class="event-edit-form" *ngIf="editingEvent?.id === event.id">
+        <div class="event-edit-form" *ngIf="editingEvent && editingEvent.id === event.id">
           <div class="form-row">
             <div class="form-group">
               <label>Title</label>
               <input 
                 type="text" 
-                [(ngModel)]="editingEvent.title" 
+                [(ngModel)]="editingEvent!.title" 
                 class="form-control"
                 placeholder="Event title"
               >
             </div>
             <div class="form-group">
               <label>Category</label>
-              <select [(ngModel)]="editingEvent.category" class="form-control">
+              <select [(ngModel)]="editingEvent!.category" class="form-control">
                 <option *ngFor="let category of eventCategories" [value]="category">
                   {{ category }}
                 </option>
@@ -73,7 +73,7 @@
           <div class="form-group">
             <label>Description</label>
             <textarea 
-              [(ngModel)]="editingEvent.description" 
+              [(ngModel)]="editingEvent!.description" 
               class="form-control"
               rows="2"
               placeholder="Event description"
@@ -85,7 +85,7 @@
               <label>Start Time</label>
               <input 
                 type="time" 
-                [(ngModel)]="editingEvent.startTime" 
+                [(ngModel)]="editingEvent!.startTime" 
                 class="form-control"
               >
             </div>
@@ -93,7 +93,7 @@
               <label>End Time</label>
               <input 
                 type="time" 
-                [(ngModel)]="editingEvent.endTime" 
+                [(ngModel)]="editingEvent!.endTime" 
                 class="form-control"
               >
             </div>
@@ -104,7 +104,7 @@
               <label>Location</label>
               <input 
                 type="text" 
-                [(ngModel)]="editingEvent.location" 
+                [(ngModel)]="editingEvent!.location" 
                 class="form-control"
                 placeholder="Event location"
               >
@@ -113,6 +113,125 @@
               <label>Cost</label>
               <input 
                 type="number" 
-                [(ngModel)]="editingEvent.cost" 
+                [(ngModel)]="editingEvent!.cost" 
                 class="form-control"
-                min="0
+                min="0"
+                placeholder="0"
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Notes</label>
+            <textarea 
+              [(ngModel)]="editingEvent!.notes" 
+              class="form-control"
+              rows="2"
+              placeholder="Additional notes"
+            ></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+            <button class="btn btn-primary" (click)="updateEvent()">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Event Button -->
+    <button class="btn-add-event" (click)="isAddingEvent = true" *ngIf="!isAddingEvent">
+      + Add New Event
+    </button>
+
+    <!-- Add Event Form -->
+    <div class="add-event-form" *ngIf="isAddingEvent">
+      <h4>Add New Event</h4>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Title</label>
+          <input 
+            type="text" 
+            [(ngModel)]="newEvent.title" 
+            class="form-control"
+            placeholder="Event title"
+          >
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select [(ngModel)]="newEvent.category" class="form-control">
+            <option *ngFor="let category of eventCategories" [value]="category">
+              {{ category }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea 
+          [(ngModel)]="newEvent.description" 
+          class="form-control"
+          rows="2"
+          placeholder="Event description"
+        ></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Start Time</label>
+          <input 
+            type="time" 
+            [(ngModel)]="newEvent.startTime" 
+            class="form-control"
+          >
+        </div>
+        <div class="form-group">
+          <label>End Time</label>
+          <input 
+            type="time" 
+            [(ngModel)]="newEvent.endTime" 
+            class="form-control"
+          >
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Location</label>
+          <input 
+            type="text" 
+            [(ngModel)]="newEvent.location" 
+            class="form-control"
+            placeholder="Event location"
+          >
+        </div>
+        <div class="form-group">
+          <label>Cost</label>
+          <input 
+            type="number" 
+            [(ngModel)]="newEvent.cost" 
+            class="form-control"
+            min="0"
+            placeholder="0"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Notes</label>
+        <textarea 
+          [(ngModel)]="newEvent.notes" 
+          class="form-control"
+          rows="2"
+          placeholder="Additional notes"
+        ></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-secondary" (click)="cancelAddEvent()">Cancel</button>
+        <button class="btn btn-primary" (click)="addEvent()">Add Event</button>
+      </div>
+    </div>
+  </div>
+</div>

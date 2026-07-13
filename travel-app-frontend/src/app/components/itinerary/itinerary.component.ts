@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ItineraryService } from '../../../services/itinerary.service';
 import { Itinerary, DayPlan, Event } from '../../../models/itinerary.model';
+import { DayPlanComponent } from '../day-plan/day-plan.component';
 
 @Component({
   selector: 'app-itinerary',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DayPlanComponent],
   templateUrl: './itinerary.component.html',
   styleUrls: ['./itinerary.component.scss']
 })

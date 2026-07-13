@@ -5,8 +5,12 @@ import { AuthService } from '../../services/auth.service';
 import { SignupRequest } from '../../../../shared/models/auth.model';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastService } from '../../../../shared/services/toast.service';
+import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-signup',
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
