@@ -1,11 +1,11 @@
 <div class="profile-container" *ngIf="user">
   <div class="profile-header">
     <div class="profile-avatar">
-      <span>{{ user.name.charAt(0) }}</span>
+      <span>{{ user?.name?.charAt(0) || 'U' }}</span>
     </div>
     <div class="profile-summary">
-      <h1 class="user-name">{{ user.name }}</h1>
-      <p class="user-email">{{ user.email }}</p>
+      <h1 class="user-name">{{ user?.name }}</h1>
+      <p class="user-email">{{ user?.email }}</p>
     </div>
     <button class="btn-logout" (click)="logout()">Logout</button>
   </div>
@@ -19,17 +19,17 @@
       <form [formGroup]="profileForm" (ngSubmit)="savePersonalDetails()">
         <div class="info-row">
           <label>Full Name</label>
-          <div *ngIf="editingSection !== 'personal'">{{ user.name }}</div>
+          <div *ngIf="editingSection !== 'personal'">{{ user?.name }}</div>
           <input *ngIf="editingSection === 'personal'" type="text" formControlName="name" class="form-control">
         </div>
         <div class="info-row">
           <label>Phone Number</label>
-          <div *ngIf="editingSection !== 'personal'">{{ user.phone }}</div>
+          <div *ngIf="editingSection !== 'personal'">{{ user?.phone }}</div>
           <input *ngIf="editingSection === 'personal'" type="text" formControlName="phone" class="form-control">
         </div>
         <div class="info-row">
           <label>Email Address</label>
-          <div>{{ user.email }} <span class="badge">Not Editable</span></div>
+          <div>{{ user?.email }} <span class="badge">Not Editable</span></div>
         </div>
         <div class="form-actions" *ngIf="editingSection === 'personal'">
           <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
